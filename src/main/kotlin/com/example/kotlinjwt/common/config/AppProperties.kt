@@ -11,4 +11,10 @@ class AppProperties {
 
     @Value("\${sns.kakao.endpoint}")
     lateinit var kakaoEndpoint: String
+
+    @Value("\${sns.google.app.id.and}")
+    lateinit var googleAppIdAnd: String
+
+    @Value("\${sns.google.app.id.ios}")
+    lateinit var googleAppIdIos: String
 }

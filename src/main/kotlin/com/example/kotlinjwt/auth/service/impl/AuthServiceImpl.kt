@@ -1,5 +1,6 @@
 package com.example.kotlinjwt.auth.service.impl
 
+import com.example.kotlinjwt.adapter.GoogleAuth
 import com.example.kotlinjwt.adapter.KakaoAuth
 import com.example.kotlinjwt.auth.service.AuthService
 import com.example.kotlinjwt.common.JWTService
@@ -12,6 +13,7 @@ import javax.persistence.EntityNotFoundException
 @Component
 class AuthServiceImpl(
     val kakaoAuth: KakaoAuth,
+    val googleAuth: GoogleAuth,
     val memberInfoRepository: MemberInfoRepository,
     val jwtService: JWTService,
 ) : AuthService {
@@ -30,6 +32,7 @@ class AuthServiceImpl(
         when (snsType) {
             SnsType.EMAIL -> true
             SnsType.KAKAO -> kakaoAuth.verifyAccessToken(accessToken, snsId)
+            SnsType.GOOGLE -> googleAuth.verifyAccessToken(accessToken, snsId)
             else -> throw Exception()
             //throw SigninSnsException(ApplicationErrorMessageCode.SNSTYPE_IS_MISMATCHED)
         }
