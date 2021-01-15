@@ -2,6 +2,7 @@ package com.example.kotlinjwt.member.entity
 
 import com.example.kotlinjwt.common.config.entity.BaseEntity
 import com.example.kotlinjwt.enum.SnsType
+import com.example.kotlinjwt.member.MemberRole
 import javax.persistence.*
 
 
@@ -25,5 +26,14 @@ class MemberInfo(
 
     var agreeService: Boolean = false,
     var agreeSecurity: Boolean = false,
-    var agreeMarketing: Boolean = false
-) : BaseEntity()
+    var agreeMarketing: Boolean = false,
+
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "memberInfo")
+    var roles: MutableSet<MemberRole> = mutableSetOf()
+
+) : BaseEntity() {
+    internal fun addRole(memberRole: MemberRole) {
+        roles.add(memberRole)
+        memberRole.memberInfo = this;
+    }
+}

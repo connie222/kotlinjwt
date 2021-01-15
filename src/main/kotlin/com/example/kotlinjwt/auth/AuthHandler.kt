@@ -20,7 +20,7 @@ class AuthHandler(
         val signinReq = request.awaitBody<SigninSnsReq>()
         return if (authService.verifyAccessToken(signinReq.snsToken, signinReq.snsType, signinReq.snsId)) {
             val member = memberService.signinSns(signinReq)
-            ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait("토큰 발생~!")//authService.getAccessToken(member.id!!)
+            ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValueAndAwait(authService.getAccessToken(member.id!!))
         }else{
             //throw SigninSnsException()
             throw Exception();

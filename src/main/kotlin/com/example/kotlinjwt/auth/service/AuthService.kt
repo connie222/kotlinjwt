@@ -1,5 +1,6 @@
 package com.example.kotlinjwt.auth.service
 
+import com.example.kotlinjwt.auth.service.impl.TokenRes
 import com.example.kotlinjwt.enum.SnsType
 
 interface AuthService {
